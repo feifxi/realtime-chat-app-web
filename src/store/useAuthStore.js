@@ -19,7 +19,7 @@ export const useAuthStore = create((set, get) => ({
 
   checkAuth: async () => {
     try {
-      const res = await axiosInstance.get("/auth/check");
+      const res = await axiosInstance.get("api/auth/check");
       set({ authUser: res.data });
 
       get().connectSocket()
@@ -33,7 +33,7 @@ export const useAuthStore = create((set, get) => ({
   signup: async (data) => {
     try {
       set({ isSigningUp: true })
-      const res = await axiosInstance.post('/auth/signup', data)
+      const res = await axiosInstance.post('api/auth/signup', data)
       set({ authUser: res.data })
       toast.success("Account created successfully")
 
@@ -48,7 +48,7 @@ export const useAuthStore = create((set, get) => ({
   login: async (data) => {
     try {
       set({ isLoggingIn: true })
-      const res = await axiosInstance.post('/auth/login', data)
+      const res = await axiosInstance.post('api/auth/login', data)
       set({ authUser: res.data })
       toast.success("Logged in successfully")
 
@@ -63,7 +63,7 @@ export const useAuthStore = create((set, get) => ({
 
   logout: async () => {
     try {
-      await axiosInstance.post('/auth/logout')
+      await axiosInstance.post('api/auth/logout')
       set({ authUser: null })
       toast.success("Logged out successfully")
 
@@ -78,7 +78,7 @@ export const useAuthStore = create((set, get) => ({
   updateProfile: async (profile) => {
     try {
       set({ isUpdatingProfile: true })
-      const res = await axiosInstance.put('/users/profilepic', { profilePic: profile })
+      const res = await axiosInstance.put('api/users/profilepic', { profilePic: profile })
       
       set({ authUser: res.data })
       toast.success('Profile updated successfully')
